@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +10,8 @@ public sealed class Board : MonoBehaviour
     public Row[] rows;
 
     public Tile[,] Tiles { get; private set; }
+
+    private readonly List<Tile> _selection = new List<Tile>();
 
     public int Width => Tiles.GetLength(0);
     public int Height => Tiles.GetLength(1);
@@ -30,10 +32,25 @@ public sealed class Board : MonoBehaviour
                 tile.x = x;
                 tile.y = y;
 
-                tile.ItemProp = ItemDataBase.ItemsProp[Random.Range(0, ItemDataBase.ItemsProp.Length)];
+                tile.Item = ItemDataBase.Items[Random.Range(0, ItemDataBase.Items.Length)];
 
                 Tiles[x, y] = tile;
             }
         }
+    }
+
+    public void Select(Tile tile)
+    {
+        if (!_selection.Contains(tile)) { _selection.Add(tile); }
+
+        
+        
+        if (_selection.Count < 2) { return; }
+        
+        
+        Debug.Log($"Selected tile at ({_selection[0].x}) , ({_selection[0].y}) and ({_selection[1].x}) , ({_selection[1].y})");
+        
+        _selection.Clear();
+        
     }
 }

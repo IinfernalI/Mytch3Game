@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public sealed class Tile : MonoBehaviour
@@ -9,26 +8,26 @@ public sealed class Tile : MonoBehaviour
     public int x;
     public int y;
 
-    private Item _itemProp;
+    private Item _item;
 
-    public Item ItemProp
+    public Item Item
     {
-        get => _itemProp;
+        get => _item;
         set
         {
-            if (_itemProp == value)
+            if (_item == value)
             {
                 return;
             }
 
-            _itemProp = value;
-            icon.sprite = _itemProp.sprite;
+            _item = value;
+            icon.sprite = _item.sprite;
         }
     }
 
     public Image icon;
 
     public Button button;
-    
-    
+
+    private void Start() => button.onClick.AddListener(() => Board.Instance.Select(this));
 }
