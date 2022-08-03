@@ -112,6 +112,7 @@ public sealed class Board : MonoBehaviour
 
                 tile.Item = ItemDataBase.Items[Random.Range(0, ItemDataBase.Items.Length)];
 
+                
                 Tiles[x, y] = tile;
             }
         }
