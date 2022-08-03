@@ -28,11 +28,6 @@ public sealed class Board : MonoBehaviour
     {
         if (!_selection.Contains(tile))
         {
-            _selection.Add(tile);
-        }
-            //! Exsception
-        /*if (!_selection.Contains(tile))
-        {
             if (_selection.Count > 0)
             {
                 if (Array.IndexOf(_selection[0].Neighbours, tile) != -1)
@@ -44,7 +39,7 @@ public sealed class Board : MonoBehaviour
             {
                 _selection.Add(tile);
             }
-        }*/
+        }
 
         if (_selection.Count < 2)
         {
