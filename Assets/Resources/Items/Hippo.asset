@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Hippo
   m_EditorClassIdentifier: 
   value: 10
-  sprite: {fileID: 21300000, guid: 1bb7138f821acdc4da936c09d2537f7c, type: 3}
+  sprite: {fileID: 21300000, guid: 2d0300d5dcc689b48ac916284eb20973, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Giraffe
   m_EditorClassIdentifier: 
   value: 5
-  sprite: {fileID: 21300000, guid: 95bf1c6ac3610ff48ad147fe9babc4bd, type: 3}
+  sprite: {fileID: 21300000, guid: d08f10ae3c52e3741af1c79efc3641cc, type: 3}
