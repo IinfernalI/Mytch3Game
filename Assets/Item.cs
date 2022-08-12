@@ -3,6 +3,7 @@
     public class Item
     {
         private int _id;
+        
         public int x;
         public int y;
 
