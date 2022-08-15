@@ -7,6 +7,7 @@ namespace DefaultNamespace
         StateMachineHandler _handler;
         StartSceneView _sceneView;
 
+        //123
         public BootState(StateMachineHandler stateMachineHandler)
         {
             _handler = stateMachineHandler;
