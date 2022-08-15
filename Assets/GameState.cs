@@ -1,16 +1,18 @@
-﻿namespace DefaultNamespace
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
+
+namespace DefaultNamespace
 {
     public class GameState : IState
     {
-        StateMachineHandler _handler;
 
-        public GameState(StateMachineHandler handler)
+        public event Action<IState> OnExiT;
+        
+        public void StartState()
         {
-            _handler = handler;
-        }
-        public void Start()
-        {
-            throw new System.NotImplementedException();
+            Debug.Log($" DO ");
+            DOVirtual.DelayedCall(3f, () => { OnExiT?.Invoke(this); });
         }
 
         public IState Exit()

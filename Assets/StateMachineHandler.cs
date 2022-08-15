@@ -7,18 +7,11 @@ namespace DefaultNamespace
     public class StateMachineHandler : MonoBehaviour
     {
         private GameStateMachine _SM;
-        public StartSceneView view;
 
         private void Start()
         {
             _SM = new GameStateMachine();
-            _SM.Init(new BootState(this));
+            _SM.InitFirstState();
         }
-
-        public StartSceneView GetView()
-        {
-            return view;
-        }
-        
     }
 }

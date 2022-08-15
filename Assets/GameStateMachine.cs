@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -8,17 +7,49 @@ namespace DefaultNamespace
     {
         public IState CurrentState { get; set; }
 
-        public void Init(IState startState)
+        public void InitFirstState()
         {
-            CurrentState = startState;
-            CurrentState.Start();
+            ChangeState(new BootState());
+        }
+
+        private void CurrentStateOnOnExiT(IState state)
+        {
+            
+            Debug.Log($"DONE {state.GetType().Name}");
+            if (state is BootState)
+            {
+                A();
+            }
+            else if(state is GameState)
+            {
+                B();
+            }
+        }
+
+        private static void B()
+        {
+            Debug.Log($"NO");
+        }
+
+        private void A()
+        {
+            Debug.Log($"state is {nameof(BootState)}");
+            ChangeState(new GameState());
         }
 
         public void ChangeState(IState newState)
         {
-            CurrentState.Exit();
+            if (CurrentState != null)
+            {
+                CurrentState.Exit();
+                CurrentState.OnExiT -= CurrentStateOnOnExiT;
+            }
+
             CurrentState = newState;
-            CurrentState.Start();
+            CurrentState.OnExiT += CurrentStateOnOnExiT;
+            CurrentState.StartState();
         }
+        
+        
     }
 }

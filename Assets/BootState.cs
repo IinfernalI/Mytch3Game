@@ -1,30 +1,47 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
     public class BootState : IState
     {
-        StateMachineHandler _handler;
+        
         StartSceneView _sceneView;
+        public event Action<IState> OnExiT;
+        
+        
 
-        public BootState(StateMachineHandler stateMachineHandler)
+        public void StartState()
         {
-            _handler = stateMachineHandler;
+            var r = SceneManager.LoadSceneAsync("StartScene");
+             r.completed += LoadSceneCompleted;
         }
 
-        public void Start()
+        private void LoadSceneCompleted(AsyncOperation obj)
         {
-            SceneManager.LoadScene("StartScene");
-            _sceneView = _handler.view;
+            obj.completed -= LoadSceneCompleted;
+            _sceneView = UnityEngine.GameObject.FindObjectOfType<StartSceneView>();
             _sceneView.OnClickStart += LoadGameScene;
+            
         }
 
         public void LoadGameScene()
         {
-            SceneManager.LoadScene("GameScene");
-            Exit();
+            var r = SceneManager.LoadSceneAsync("GameScene");
+            r.completed += LoadGameSceneCompleted;
+
+            void LoadGameSceneCompleted(AsyncOperation obj)
+            {
+                obj.completed -= LoadGameSceneCompleted;
+                OnExiT?.Invoke(this);
+            }
         }
-        
+
+       
+
         public IState Exit()
         {
             return this;
