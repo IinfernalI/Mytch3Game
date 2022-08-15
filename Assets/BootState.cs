@@ -11,13 +11,17 @@ namespace DefaultNamespace
         
         StartSceneView _sceneView;
         public event Action<IState> OnExiT;
+        public event Action<IState> OnMoved;
         
         
+        
+        //reload merge git
 
         public void StartState()
         {
             var r = SceneManager.LoadSceneAsync("StartScene");
              r.completed += LoadSceneCompleted;
+            
         }
 
         private void LoadSceneCompleted(AsyncOperation obj)
